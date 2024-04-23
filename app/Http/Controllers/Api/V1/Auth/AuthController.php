@@ -16,12 +16,13 @@ class AuthController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
+            'rol' => 'required|string',
         ]);
 
         $user = User::create([
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
-            // 'role'=> 'admin',
+            // 'role'=> $validatedData['rol'],
             'password' => Hash::make($validatedData['password']),
         ]);
 
@@ -29,7 +30,7 @@ class AuthController extends Controller
         $tokenExpiration = now()->addMinutes(config('sanctum.expiration'));
 
 
-        $user->assignRole('admin');
+        $user->assignRole($validatedData['rol']);
 
         return response()->json([
             'access_token' => $token,

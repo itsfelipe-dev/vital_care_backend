@@ -15,8 +15,8 @@ class RoleSeeder extends Seeder
     public function run(): void
     {
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
-        $user = Role::create(['name' => 'user']);
-        $admin = Role::create(['name' => 'admin']);
+        $user = Role::create(['name' => 'paciente']);
+        $admin = Role::create(['name' => 'aux']);
 
         $admin->givePermissionTo(Permission::all());
         $user->givePermissionTo(Permission::all());
