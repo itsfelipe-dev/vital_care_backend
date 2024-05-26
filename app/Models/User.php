@@ -47,5 +47,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    // Relación con AuxProfile
+    public function auxProfile()
+    {
+        return $this->hasOne(AuxProfile::class);
+    }
 
 }
